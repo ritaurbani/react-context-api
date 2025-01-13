@@ -3,10 +3,14 @@ import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useAlertContext } from "../../contexts/AlertContext";
 
 const apiBase = "http://localhost:3000";
 
 function ShowPostDetails() {
+
+const {error, setError} = useAlertContext()
+
    //devo aggiornare quindi mi serve variabile
    const [post, setPost] = useState(null) //ancora non ce nessuna pizza
    const [loading, setLoading] = useState(false) //ancora non ce nessuna pizza
@@ -24,6 +28,7 @@ function ShowPostDetails() {
             setPost(resp.data)
          })
          .catch((err) => {
+            setError("post non trovato")
             if (err.status === 404) { //rotta non-found non esite quindi finisce nel route definito in app.jsx
                navigate("/not-found")
             }
