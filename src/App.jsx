@@ -8,22 +8,22 @@ import ShowPostDetails from "./pages/posts/ShowPostDetails";
 import NotFoundPage from "./pages/NotFoundPage";
 import GlobalContext from "./contexts/GlobalContext";
 import { useEffect, useState } from "react";
+import axios from "axios";
+const apiBase = "http://localhost:3000";
 
 function App() {
 
-  const [posts, setposts] = useState([])
-
-
+  const [posts, setPosts] = useState([])
 
   //filtro i dati direttamente a livello di backend (nel server), tramite il parametro tag.
   const getPosts = () => {
-    let url = `${apiBase}/posts`; // 
-    //// Verifica se il filtro è diverso da "all" - il codice aggiunge un parametro alla query string dell'URL. per chiedere al server di restituire solo i dati che corrispondono al filtro.(tag=art)/tag=${filter}
-    if (filter !== null && filter !== 'all') {
-      // Se il filtro non è "all", aggiungi il parametro di query all'URL (filtra per tag)
-      url += `?tags=${filter}`;
-    }
-    axios.get(url).then((resp) => { //Esegui la richiesta GET con l'URL costruito
+    // let url = `${apiBase}/posts`; // 
+    // //// Verifica se il filtro è diverso da "all" - il codice aggiunge un parametro alla query string dell'URL. per chiedere al server di restituire solo i dati che corrispondono al filtro.(tag=art)/tag=${filter}
+    // if (filter !== null && filter !== 'all') {
+    //   // Se il filtro non è "all", aggiungi il parametro di query all'URL (filtra per tag)
+    //   url += `?tags=${filter}`;
+    // }
+    axios.get(`${apiBase}/posts`).then((resp) => { //Esegui la richiesta GET con l'URL costruito
       console.log("resp.data: ", resp.data);
       setPosts(resp.data) // setPosts(resp.data.posts || []) //Aggiorna lo stato 'posts' con l'elenco dei posts ricevute
     });
@@ -38,7 +38,7 @@ const globalProviderValue = {
 }
 
   return (
-    <GlobalContext.Provider value={globalProviderValue}> //wrap app
+    <GlobalContext.Provider value={globalProviderValue}> 
       <BrowserRouter>
         <Routes>
           {/* //Setti rotta layout con tutte le altre rotte-solo quello che ce nell outlet viene cambiato */}

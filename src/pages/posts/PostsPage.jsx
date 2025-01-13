@@ -28,18 +28,18 @@ function PostsPage() {
     }, []);
 
     //filtro i dati direttamente a livello di backend (nel server), tramite il parametro tag.
-    const getPosts = () => {
-        let url = `${apiBase}/posts`; // 
-        //// Verifica se il filtro è diverso da "all" - il codice aggiunge un parametro alla query string dell'URL. per chiedere al server di restituire solo i dati che corrispondono al filtro.(tag=art)/tag=${filter}
-        if (filter !== null && filter !== 'all') {
-            // Se il filtro non è "all", aggiungi il parametro di query all'URL (filtra per tag)
-            url += `?tags=${filter}`;
-        }
-        axios.get(url).then((resp) => { //Esegui la richiesta GET con l'URL costruito
-            console.log("resp.data: ", resp.data);
-            setPosts(resp.data) // setPosts(resp.data.posts || []) //Aggiorna lo stato 'posts' con l'elenco dei posts ricevute
-        });
-    }
+    // const getPosts = () => {
+    //     let url = `${apiBase}/posts`; // 
+    //     //// Verifica se il filtro è diverso da "all" - il codice aggiunge un parametro alla query string dell'URL. per chiedere al server di restituire solo i dati che corrispondono al filtro.(tag=art)/tag=${filter}
+    //     if (filter !== null && filter !== 'all') {
+    //         // Se il filtro non è "all", aggiungi il parametro di query all'URL (filtra per tag)
+    //         url += `?tags=${filter}`;
+    //     }
+    //     axios.get(url).then((resp) => { //Esegui la richiesta GET con l'URL costruito
+    //         console.log("resp.data: ", resp.data);
+    //         setPosts(resp.data) // setPosts(resp.data.posts || []) //Aggiorna lo stato 'posts' con l'elenco dei posts ricevute
+    //     });
+    // }
 
     const getTags = () => {
         axios.get(`${apiBase}/tags`).then((resp) => {
