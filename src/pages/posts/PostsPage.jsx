@@ -1,24 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Card from "../../components/Card"
 import axios from "axios"
 import PostCreatePage from './PostCreatePage'
 import { Link } from 'react-router-dom'
+import GlobalContext from '../../contexts/GlobalContext'
 
 
 //DATI, FILTRO (FORM LO METTO IN UN ALTRA PAGINA)
 function PostsPage() {
 
-    const [posts, setPosts] = useState([])
+    // const [posts, setPosts] = useState([])
     const [tags, setTags] = useState([])
     const [filter, setFilter] = useState("all") //valore del filtro selezionato da utente
+
+    const {posts} = useContext(GlobalContext)
 
     const apiBase = "http://localhost:3000";
 
     //blocco di inizializzazione
-    useEffect(() => {
-        console.log("useEffect")
-        getPosts();
-    }, [filter]);
+    // useEffect(() => {
+    //     console.log("useEffect")
+    //     getPosts();
+    // }, [filter]);
 
     useEffect(() => {
         getTags()
